@@ -43,7 +43,7 @@ const App = () => {
           <h1 className='text-white text-4xl text-center overflow-y-hidden'>PokeDex</h1>
         </div>
         <div className='text-4xl'>
-          <a href=""> <FaSquareGithub   className='text-white ' /></a>
+          <a href="https://github.com/garvittsingla/pokemon-react"> <FaSquareGithub   className='text-white ' /></a>
         </div>
       </div>
       <div className=' h-16 flex justify-center items-center '>
