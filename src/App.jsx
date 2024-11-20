@@ -3,12 +3,14 @@ import axios from 'axios'
 import "./App.css"
 import { FaSquareGithub } from "react-icons/fa6";
 import Poke from './components/Poke.jsx'
+import pokeball from './pokeball.png'
 
 
 const App = () => {
   const [cards,setcards]= useState([])
   const [search,setsearch]= useState('')
   const [filter1,setfilter1]= useState([])
+  const [isLoading, setIsLoading] = useState(false);
 
 
   async function getData(){
@@ -24,7 +26,11 @@ const App = () => {
     setcards(response3)
     }
   useEffect(()=>{
-    getData()
+    setIsLoading(true);
+    getData().then(()=>{
+      setIsLoading(false);
+    })
+    // setIsLoading(false);
   },[])
   function filterData(){
     const filtered = cards.filter((item)=>{
@@ -39,7 +45,8 @@ const App = () => {
     <div className='bodytag h-screen w-screen bg-[#000000]  font-mono'>
       
       <div className='h-fit  flex justify-between p-10 items-center' >
-        <div>
+        <div className='flex'>
+          <img className='h-10 w-10 mr-2' src={pokeball} alt="" />
           <h1 className='text-white text-4xl text-center overflow-y-hidden'>PokeDex</h1>
         </div>
         <div className='text-4xl'>
@@ -47,8 +54,9 @@ const App = () => {
         </div>
       </div>
       <div className=' h-16 flex justify-center items-center '>
-        <input type="text" placeholder='Search a Pokemon...' className='rounded border-none w-2/4 p-2 focus:border-orange-400 border-2' onChange={(e)=>{setsearch(e.target.value )}}/>
+        <input type="text" placeholder='Search a Pokemon...' className='rounded border-none w-2/4 p-2 focus:border-orange-400 border-2' onChange={(e)=>{setsearch(e.target.value.toLowerCase() )}}/>
       </div>
+      {isLoading ? <p className='text-white text-center '>Loading...</p> : null}
       <div className='flex justify-center items-center w-full mt-6'>
         <div className='grid grid-cols-1 md:grid-cols-4 gap-12  h-[90%] w-[90%] '>
           {filter1.map((item)=>{
