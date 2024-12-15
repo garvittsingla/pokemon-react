@@ -11,10 +11,11 @@ const App = () => {
   const [search,setsearch]= useState('')
   const [filter1,setfilter1]= useState([])
   const [isLoading, setIsLoading] = useState(false);
+  
 
 
   async function getData(){
-    const response =await axios.get("https://pokeapi.co/api/v2/pokemon?limit=300")
+    const response =await axios.get("https://pokeapi.co/api/v2/pokemon?limit=1200")
     // console.log(response.data)
     const response2 = await Promise.all(response.data.results.map((itm)=>{
       return axios.get(itm.url)
@@ -30,7 +31,7 @@ const App = () => {
     getData().then(()=>{
       setIsLoading(false);
     })
-    // setIsLoading(false);
+    
   },[])
   function filterData(){
     const filtered = cards.filter((item)=>{
@@ -57,8 +58,8 @@ const App = () => {
         <input type="text" placeholder='Search a Pokemon...' className='rounded border-none w-2/4 p-2 focus:border-orange-400 border-2' onChange={(e)=>{setsearch(e.target.value.toLowerCase() )}}/>
       </div>
       {isLoading ? <p className='text-white text-center '>Loading...</p> : null}
-      <div className='flex justify-center items-center w-full mt-6'>
-        <div className='grid grid-cols-1 md:grid-cols-4 gap-12  h-[90%] w-[90%] '>
+      <div className='flex  justify-center items-center w-full mt-6'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 h-[90%]  '>
           {filter1.map((item)=>{
             return(
               <Poke key={item.id} name={item.name} image={item.sprites.front_default} height={item.height} weight={item.weight} ability1={item.types[0].type.name}/>
