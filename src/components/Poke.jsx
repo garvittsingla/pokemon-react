@@ -4,7 +4,7 @@ import { GiWeightLiftingUp } from "react-icons/gi";
 import bgsvg from '../assets/bgsvg.svg'
 import { FaCircle } from "react-icons/fa";
 
-const Poke = ({image,name,height,weight,ability1}) => {
+const Poke = ({image,name,height,weight,ability1,addtofav,id}) => {
   const typeColors = {
     normal: 'bg-gray-700',
     fire: 'bg-red-800',
@@ -29,7 +29,7 @@ const Poke = ({image,name,height,weight,ability1}) => {
   return (
     <div className={`h-96 w-72 rounded-xl relative ${typeColors[ability1] || 'bg-gray-200'}`}>
       <img className='absolute left-0' src={bgsvg} alt="" />
-      <img className='mx-auto h-2/4' src={image} alt="" />
+      <img className='mx-auto h-2/4 shadow-2xl rounded-lg' src={image} alt="" />
       <h2 className='text-white text-center text-2xl flex items-center justify-center gap-2'>
         <FaCircle />{name}<FaCircle />
       </h2>
@@ -53,6 +53,10 @@ const Poke = ({image,name,height,weight,ability1}) => {
       </div>
       <div>
         <p className='text-white text-center text-lg font-semibold'>Type: {ability1}</p>
+      </div>
+      <div className='w-full flex items-center mt-2 justify-center'>
+      <button onClick={()=>addtofav(id)} className='px-3 rounded-lg  py-2 bg-orange-400 text-white font-semibold'>Add to favourites</button>
+
       </div>
     </div>
   )
